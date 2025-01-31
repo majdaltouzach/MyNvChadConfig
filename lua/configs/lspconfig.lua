@@ -124,4 +124,19 @@ lspconfig.csharp_ls.setup {
   filetypes = { "cs" },
   init_options = { AutomaticWorkspaceInit = true}
 }
+lspconfig.pylsp.setup {
+  cmd = {"pylsp"},
+  filetypes = { "python" },
+  single_file_support = true,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 100,
+        }
+      }
+    }
+  }
+}
 
