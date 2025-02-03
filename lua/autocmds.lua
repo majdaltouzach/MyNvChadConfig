@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 -- user event that loads after UIEnter + only if file buf is there
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
@@ -23,5 +24,15 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
         end
       end)
     end
+  end,
+})
+
+local vimtex_group = augroup("VimtexAutoCompile", { clear = true })
+
+autocmd("BufWritePost", {
+  pattern = "*.tex",
+  group = vimtex_group,
+  callback = function()
+    vim.cmd("VimtexCompile")
   end,
 })
