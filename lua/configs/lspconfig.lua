@@ -140,6 +140,6 @@ lspconfig.ccls.setup {
   capabilities = nvlsp.capabilities,
   cmd = {"ccls"},
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-  offset_encoding = {"utf-32"},
+  -- offset_encoding = {"utf-32"},
   single_file_support = {true}
 }
