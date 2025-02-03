@@ -124,3 +124,12 @@ lspconfig.csharp_ls.setup {
   filetypes = { "cs" },
   init_options = { AutomaticWorkspaceInit = true}
 }
+
+lspconfig.markdown_oxide.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  cmd = {"markdown-oxide"},
+  filetypes = {"markdown"},
+  single_file_support = {true}
+}
