@@ -134,12 +134,3 @@ lspconfig.markdown_oxide.setup {
   single_file_support = {true}
 }
 
-lspconfig.ccls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  cmd = {"ccls"},
-  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-  -- offset_encoding = {"utf-32"},
-  single_file_support = {true}
-}
