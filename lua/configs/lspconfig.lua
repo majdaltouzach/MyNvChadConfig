@@ -134,3 +134,18 @@ lspconfig.markdown_oxide.setup {
   single_file_support = {true}
 }
 
+
+lspconfig.arduino_language_server.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = {
+    textDocument = {
+    semanticTokens = vim.NIL
+  },
+  workspace = {
+    semanticTokens = vim.NIL
+  }
+  },
+  cmd = {"arduino-language-server"},
+  filetypes = {"arduino"}
+}
