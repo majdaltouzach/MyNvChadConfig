@@ -1,8 +1,13 @@
 # Install Instructions
-### Install on Windows:
+### Install on Windows using **Command Prompt**:
 ```bash
 git clone https://github.com/majdaltouzach/MyNvChadConfig.git %USERPROFILE%\AppData\Local\nvim && nvim  
 ```
+### Install on Windows using **PowerShell (pwsh)**:
+```bash 
+git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim && nvim
+```
+
 ### Install on MacOS & Linux:
 ```bash 
 git clone https://github.com/majdaltouzach/MyNvChadConfig.git ~/.config/nvim && nvim
