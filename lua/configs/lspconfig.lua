@@ -149,3 +149,32 @@ lspconfig.arduino_language_server.setup {
   cmd = {"arduino-language-server"},
   filetypes = {"arduino"}
 }
+
+lspconfig.vimls.setup {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  cmd = {"vim-language-server", "--stdio"},
+  filetypes = {"vim"},
+  init_options = {
+    diagnostic = {
+    enable = true
+  },
+  indexes = {
+    count = 3,
+    gap = 100,
+    projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+    runtimepath = true
+  },
+  isNeovim = true,
+  iskeyword = "@,48-57,_,192-255,-#",
+  runtimepath = "",
+  suggest = {
+    fromRuntimepath = true,
+    fromVimruntime = true
+  },
+  vimruntime = ""
+  },
+  single_file_support = {true}
+
+}
