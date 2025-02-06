@@ -48,7 +48,8 @@ lspconfig.jdtls.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-  filetypes = { "java" },
+  cmds = { "jdtls", "-configuration", "/home/user/.cache/jdtls/config", "-data", "/home/user/.cache/jdtls/workspace" }
+
 }
 
 lspconfig.texlab.setup {
