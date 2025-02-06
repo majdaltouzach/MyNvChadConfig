@@ -14,7 +14,6 @@
   "glow.nvim": { "branch": "main", "commit": "238070a686c1da3bccccf1079700eb4b5e19aea4" },
   "img-clip.nvim": { "branch": "main", "commit": "5ded6f468d633ccfb315905fe8901d6c95ae8f29" },
   "indent-blankline.nvim": { "branch": "master", "commit": "e10626f7fcd51ccd56d7ffc00883ba7e0aa28f78" },
-  "joplin.vim": { "branch": "main", "commit": "36417b3950d9d6b6e2837009ee75b30c31f26e41" },
   "lazy.nvim": { "branch": "main", "commit": "7527af40ddd4a93a02911be570b32609b9d4ea53" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "menu": { "branch": "main", "commit": "7769b17c2a131108c02b10e9f844e504aa605cc2" },
