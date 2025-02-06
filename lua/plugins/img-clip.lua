@@ -2,7 +2,7 @@ return {
   "HakonHarnes/img-clip.nvim",
   event = "VeryLazy",
   opts = {
-    use_absolute_path = true,
+    use_absolute_path = false,
     insert_mode = true,
     filetypes = {
       tex = {
