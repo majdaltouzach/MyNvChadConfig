@@ -27,9 +27,10 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
+-- Auto-compile LaTeX on write and text changes
 local vimtex_group = augroup("VimtexAutoCompile", { clear = true })
 
-autocmd("BufWritePost", {
+autocmd({ "BufWritePost", "TextChanged", "InsertLeave" }, {
   pattern = "*.tex",
   group = vimtex_group,
   callback = function()
