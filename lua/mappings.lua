@@ -8,6 +8,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "<leader>cc", "<cmd>VimtexCompile<CR>", { desc = "Compile LaTeX document" })
 map("n", "<leader>cv", "<cmd>VimtexView<CR>", { desc = "View LaTex pdf output" })
+map("n", "<leader>op", "<cmd>PeekOpen<CR>", { desc = "View Markdown Output" })
 
 local api = require('remote-sshfs.api')
 vim.keymap.set('n', '<leader>rc', api.connect, {})
