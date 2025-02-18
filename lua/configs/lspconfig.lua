@@ -126,11 +126,3 @@ lspconfig.taplo.setup {
   single_file_support = { true },
 }
 
-lspconfig.pkgbuild_language_server.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  cmd = { "pkgbuild-language-server" },
-  filetypes = { "PKGBUILD" },
-  root_dir = { "gF" },
-}
