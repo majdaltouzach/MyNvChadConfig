@@ -10,6 +10,12 @@ map("n", "<leader>cc", "<cmd>VimtexCompile<CR>", { desc = "Compile LaTeX documen
 map("n", "<leader>cv", "<cmd>VimtexView<CR>", { desc = "View LaTex pdf output" })
 map("n", "<leader>op", "<cmd>PeekOpen<CR>", { desc = "View Markdown Output" })
 
+-- Overseer keybinds
+vim.keymap.set("n", "<leader>or", ":OverseerRun<CR>", { desc = "Run Overseer Task" })
+vim.keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Task Window" })
+vim.keymap.set("n", "<leader>ol", ":OverseerLoadBundle<CR>", { desc = "Load Overseer Bundle" })
+
+
 local api = require('remote-sshfs.api')
 vim.keymap.set('n', '<leader>rc', api.connect, {})
 vim.keymap.set('n', '<leader>rd', api.disconnect, {})

@@ -1,13 +1,19 @@
 return {
-'stevearc/overseer.nvim',
- lazy = false,
-  config = function ()
-    require("overseer").setup({
-        templates = { "builtin", "user.cpp_build" },
-    })
+  "stevearc/overseer.nvim",
+  lazy = false,
+  config = function()
+    require("overseer").setup {
+      templates = { "builtin", "user.cpp_build" },
+      strategy = "toggleterm",
+      task_list = {
+        default_detail = 1,
+        bindings = {
+          ["<CR>"] = "run",
+          ["q"] = "close",
+        },
+      },
+    }
   end,
 
-  opts = {
-
-  },
+  opts = {},
 }
