@@ -15,6 +15,8 @@ vim.keymap.set("n", "<leader>or", ":OverseerRun<CR>", { desc = "Run Overseer Tas
 vim.keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Task Window" })
 vim.keymap.set("n", "<leader>ol", ":OverseerLoadBundle<CR>", { desc = "Load Overseer Bundle" })
 
+-- Toggle term
+map("n", "<leader>tt","<cmd>ToggleTerm<CR>", {desc = "Toggles ToggleTerm terminal emulator in neovim"})
 
 local api = require('remote-sshfs.api')
 vim.keymap.set('n', '<leader>rc', api.connect, {})
