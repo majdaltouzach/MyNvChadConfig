@@ -1,6 +1,12 @@
 return {
 'stevearc/overseer.nvim',
-  cmds = {"OverseerRun", "OverseerToggle"},
+ lazy = false,
+  config = function ()
+    require("overseer").setup({
+        templates = { "builtin", "user.cpp_build" },
+    })
+  end,
+
   opts = {
 
   },
