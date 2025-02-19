@@ -125,4 +125,21 @@ lspconfig.taplo.setup {
   filetypes = { "toml" },
   single_file_support = { true },
 }
+lspconfig.bashls.setup {
+  cmd = { "bash-language-server", "start" },
+  filetypes = {"bash", "sh"},
+  root_dir = {"gF"},
+  settings = {
+     bashIde = {
+    globPattern = "*@(.sh|.inc|.bash|.command)"
+  }
+  },
+  single_file_support = true
+}
 
+lspconfig.nginx_language_server.setup {
+  cmd = {"nginx-language-server"},
+  filetypes = {"nginx"},
+  root_dir = "gF",
+  single_file_support = true
+}
