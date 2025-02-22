@@ -143,3 +143,10 @@ lspconfig.nginx_language_server.setup {
   root_dir = "gF",
   single_file_support = true
 }
+
+lspconfig.clojure_lsp.setup {
+  cmd = {"clojure-lsp"},
+  filetypes = {"clojure", "edn"},
+  root_dir = {"gF"},
+  single_file_support = true
+}
