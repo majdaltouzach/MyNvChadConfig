@@ -146,7 +146,7 @@ lspconfig.clojure_lsp.setup {
   single_file_support = true
 }
 
-lspconfig.gdscript.setup {
+lspconfig.gdtoolkit.setup {
   cmd = {"gdtoolkit"},
   filetypes = { "gd", "gdscript", "gdscript3", "gdshader", "gdshaderinc"},
   root_dir = {"gF"}
