@@ -16,11 +16,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities, }
 lspconfig.hls.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
@@ -149,4 +144,17 @@ lspconfig.clojure_lsp.setup {
   filetypes = {"clojure", "edn"},
   root_dir = {"gF"},
   single_file_support = true
+}
+
+lspconfig.gdscript.setup {
+  cmd = {"gF"},
+  filetypes = { "gd", "gdscript", "gdscript3"},
+  root_dir = {"gF"}
+
+}
+
+lspconfig.gdshader_lsp.setup {
+  cmd = {"gdshader-lsp", "--stdio"},
+  filetypes = { "gdshader", "gdshaderinc" },
+  root_dir = {"gF"}
 }
