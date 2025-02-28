@@ -1,14 +1,11 @@
-
 return {
   name = "gcc build",
   builder = function()
-    -- Full path to current file
-    local file = vim.fn.expand("%:p")
-    -- Get file path without extension
-    local output = vim.fn.expand("%:p:r")
+    local file = vim.fn.expand("%:p")  -- Full path to the current file
+    local output = vim.fn.expand("%:p:r")  -- Remove the extension for the output file
     return {
       cmd = { "gcc" },
-      args = { file, "-o", output },
+      args = { file, "-o", output, "-Wall", "-Wextra", "-Werror", "-g" },
       components = { { "on_output_quickfix", open = true }, "default" },
     }
   end,
