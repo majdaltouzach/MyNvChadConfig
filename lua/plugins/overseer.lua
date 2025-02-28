@@ -3,7 +3,7 @@ return {
   lazy = false,
   config = function()
     require("overseer").setup {
-      templates = { "builtin", "user.cpp_build" },
+      templates = { "builtin", "user.cpp_build", "user.c_build" },
       strategy = "toggleterm",
       task_list = {
         default_detail = 1,
