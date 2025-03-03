@@ -1,5 +1,5 @@
 return {
-  name = "gcc build pthread lrt",
+  name = "gcc build 327lab",
   builder = function()
     local file = vim.fn.expand "%:p" -- Full path to the current file
     local output = vim.fn.expand "%:p:r" -- Remove the extension for the output file
