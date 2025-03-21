@@ -9,7 +9,13 @@ return {
         "MunifTanjim/nui.nvim",
     },
     opts = {
-        -- configuration goes here
-  },
-
+        lang = "cpp",  -- Set your preferred language (e.g., python, java, etc.)
+        cookie = "LEETCODE_SESSION=your_session_value; csrftoken=your_csrf_token; INGRESSCOOKIE=your_ingress_cookie;",
+        
+        -- Custom key mappings
+        mappings = {
+            next_testcase = "]t",  -- Jump to the next test case
+            prev_testcase = "[t",  -- Jump to the previous test case
+        },
+    },
 }
