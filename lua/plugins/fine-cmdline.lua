@@ -7,12 +7,12 @@ return {
       cmdline = {
         enable_keymaps = true,
         smart_history = true,
-        prompt = '➤ ', -- Looks clean and modern
+        prompt = '➤ ',
       },
       popup = {
         position = {
-          row = '40%', -- vertically centered-ish
-          col = '50%', -- horizontally centered
+          row = '50%',
+          col = '50%',
         },
         size = {
           width = '60%',
@@ -23,10 +23,10 @@ return {
         win_options = {
           winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
         },
+        relative = 'editor', -- 👈 ensures it's centered relative to the whole editor
       },
       hooks = {
         after_mount = function(input)
-          -- Autofocus the input field
           input:map('i', '<C-c>', function()
             input:unmount()
           end, { noremap = true })
