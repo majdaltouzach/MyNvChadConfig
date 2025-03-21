@@ -34,12 +34,12 @@ return {
     },
 
     -- Custom key mappings
-    mappings = {
-      next_testcase = "<leader>ln", -- "leetcode next"
-      prev_testcase = "<leader>lp", -- "leetcode previous"
-      pick_question = "<leader>lq", -- "leetcode question"
-      run_code = "<leader>lr", -- "leetcode run"
-      submit_code = "<leader>ls", -- "leetcode submit"
-    },
+    -- mappings = {
+    --   next_testcase = "<leader>ln", -- "leetcode next"
+    --   prev_testcase = "<leader>lp", -- "leetcode previous"
+    --   pick_question = "<leader>lq", -- "leetcode question"
+    --   run_code = "<leader>lr", -- "leetcode run"
+    --   submit_code = "<leader>ls", -- "leetcode submit"
+    -- },
   },
 }
