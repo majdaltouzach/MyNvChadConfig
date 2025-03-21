@@ -5,5 +5,10 @@ return {
     require('fine-cmdline').setup({
 
     })
-  end
+  end,
+  dependencies = {
+    lazy = false,
+    'MunifTanjim/nui.nvim'
+  }
+
 }
