@@ -24,11 +24,12 @@ vim.keymap.set('n', '<leader>rd', api.disconnect, {})
 vim.keymap.set('n', '<leader>re', api.edit, {})
 
 -- Leetcode.nvim 
-vim.keymap.set("n", "<leader>pp", "<cmd>Leet question<CR>", { desc = "Pick LeetCode Question" })
+vim.keymap.set("n", "<leader>pp", "<cmd>Leet<CR>", { desc = "Pick LeetCode Question" })
 vim.keymap.set("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run LeetCode Code" })
 vim.keymap.set("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit LeetCode Code" })
 vim.keymap.set("n", "<leader>ln", "<cmd>Leet next_testcase<CR>", { desc = "Next LeetCode Test Case" })
 vim.keymap.set("n", "<leader>lp", "<cmd>Leet prev_testcase<CR>", { desc = "Previous LeetCode Test Case" })
+vim.keymap.set("n", "<leader>ll", "<cmd>Leet lang<CR>", { desc = "Set LeetCode Language" })
 
 
 -- FindCMDLine
