@@ -24,7 +24,9 @@ vim.keymap.set('n', '<leader>rd', api.disconnect, {})
 vim.keymap.set('n', '<leader>re', api.edit, {})
 
 -- FindCMDLine
-vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdLine<CR>', {noremap = true})
+if pcall(require, "fine-cmdline") then
+  vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+end
 
 -- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
 local builtin = require("telescope.builtin")
