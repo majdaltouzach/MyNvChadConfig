@@ -168,3 +168,10 @@ lspconfig.jsonls.setup {
   root_dir = {"gF"},
   single_file_support = true
 }
+
+lspconfig.docker_compose_language_service.setup {
+  cmd = { "docker-compose-langserver", "--stdio" },
+  filetypes = { "yaml.docker-compose" },
+  root_dir = {"gF"},
+  single_file_support = true
+}
