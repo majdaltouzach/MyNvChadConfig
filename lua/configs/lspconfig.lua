@@ -122,28 +122,28 @@ lspconfig.taplo.setup {
 }
 lspconfig.bashls.setup {
   cmd = { "bash-language-server", "start" },
-  filetypes = {"bash", "sh"},
-  root_dir = {"gF"},
+  filetypes = { "bash", "sh" },
+  root_dir = { "gF" },
   settings = {
-     bashIde = {
-    globPattern = "*@(.sh|.inc|.bash|.command)"
-  }
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)",
+    },
   },
-  single_file_support = true
+  single_file_support = true,
 }
 
 lspconfig.nginx_language_server.setup {
-  cmd = {"nginx-language-server"},
-  filetypes = {"nginx"},
+  cmd = { "nginx-language-server" },
+  filetypes = { "nginx" },
   root_dir = "gF",
-  single_file_support = true
+  single_file_support = true,
 }
 
 lspconfig.clojure_lsp.setup {
-  cmd = {"clojure-lsp"},
-  filetypes = {"clojure", "edn"},
-  root_dir = {"gF"},
-  single_file_support = true
+  cmd = { "clojure-lsp" },
+  filetypes = { "clojure", "edn" },
+  root_dir = { "gF" },
+  single_file_support = true,
 }
 
 -- lspconfig.gdtoolkit.setup {
@@ -158,20 +158,27 @@ lspconfig.clojure_lsp.setup {
 --   filetypes = { "gdshader", "gdshaderinc" },
 --   root_dir = {"gF"}
 -- }
--- 
+--
 lspconfig.jsonls.setup {
   cmd = { "vscode-json-language-server", "--stdio" },
-  filetypes = {"json", "jsonc"},
+  filetypes = { "json", "jsonc" },
   init_options = {
-    provideFormatter = true
+    provideFormatter = true,
   },
-  root_dir = {"gF"},
-  single_file_support = true
+  root_dir = { "gF" },
+  single_file_support = true,
 }
 
 lspconfig.docker_compose_language_service.setup {
   cmd = { "docker-compose-langserver", "--stdio" },
   filetypes = { "yaml.docker-compose" },
-  root_dir = {"gF"},
-  single_file_support = true
+  root_dir = { "gF" },
+  single_file_support = true,
+}
+
+lspconfig.dockerls.setup {
+  cmd = { "docker-langserver", "--stdio" },
+  filetypes = { "dockerfile" },
+  root_dir = { "gF" },
+  single_file_support = true,
 }
