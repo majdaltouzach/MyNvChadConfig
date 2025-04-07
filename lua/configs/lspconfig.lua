@@ -182,3 +182,11 @@ lspconfig.dockerls.setup {
   root_dir = { "gF" },
   single_file_support = true,
 }
+
+lspconfig.lemminx.setup {
+  cmd = { "lemminx" },
+  filetypes = { "xml", "xsd", "xsl", "xslt", "svg" },
+  root_dir = {"gF"},
+  single_file_support = true
+
+}
