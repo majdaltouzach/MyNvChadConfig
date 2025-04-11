@@ -190,3 +190,14 @@ lspconfig.lemminx.setup {
   single_file_support = true
 
 }
+
+lspconfig.cmake.setup {
+ cmd = {"cmake-language-server"},
+ filetypes = {"cmake"},
+ init_options = {
+    buildDirectory = "build"
+  },
+
+  root_dir = {"gF"},
+  single_file_support = true
+}
