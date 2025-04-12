@@ -54,13 +54,16 @@ lspconfig.texlab.setup {
   filetypes = { "tex", "plaintex", "bib" },
 }
 
-lspconfig.csharp_ls.setup {
+lspconfig.omnisharp.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
-  cmd = { "csharp-ls" },
-  filetypes = { "cs" },
-  init_options = { AutomaticWorkspaceInit = true },
+  cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+  filetypes = { "cs", "vb" },
+  root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
+  enable_import_completion = true,
+  organize_imports_on_format = true,
+  enable_roslyn_analyzers = true,
 }
 
 lspconfig.markdown_oxide.setup {
