@@ -16,14 +16,14 @@ vim.keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Task W
 vim.keymap.set("n", "<leader>ol", ":OverseerLoadBundle<CR>", { desc = "Load Overseer Bundle" })
 
 -- Toggle term
-map("n", "<leader>tt","<cmd>ToggleTerm<CR>", {desc = "Toggles ToggleTerm terminal emulator in neovim"})
+map("n", "<leader>tt", "<cmd>ToggleTerm<CR>", { desc = "Toggles ToggleTerm terminal emulator in neovim" })
 
-local api = require('remote-sshfs.api')
-vim.keymap.set('n', '<leader>rc', api.connect, {})
-vim.keymap.set('n', '<leader>rd', api.disconnect, {})
-vim.keymap.set('n', '<leader>re', api.edit, {})
+local api = require "remote-sshfs.api"
+vim.keymap.set("n", "<leader>rc", api.connect, {})
+vim.keymap.set("n", "<leader>rd", api.disconnect, {})
+vim.keymap.set("n", "<leader>re", api.edit, {})
 
--- Leetcode.nvim 
+-- Leetcode.nvim
 vim.keymap.set("n", "<leader>pp", "<cmd>Leet<CR>", { desc = "Pick LeetCode Question" })
 vim.keymap.set("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run LeetCode Code" })
 vim.keymap.set("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit LeetCode Code" })
@@ -31,26 +31,34 @@ vim.keymap.set("n", "<leader>ln", "<cmd>Leet next_testcase<CR>", { desc = "Next 
 vim.keymap.set("n", "<leader>lp", "<cmd>Leet prev_testcase<CR>", { desc = "Previous LeetCode Test Case" })
 vim.keymap.set("n", "<leader>ll", "<cmd>Leet lang<CR>", { desc = "Set LeetCode Language" })
 
-
 -- FindCMDLine
 if pcall(require, "fine-cmdline") then
-  vim.api.nvim_set_keymap('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+  vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
 end
 
 -- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
-local builtin = require("telescope.builtin")
-local connections = require("remote-sshfs.connections")
+local builtin = require "telescope.builtin"
+local connections = require "remote-sshfs.connections"
 vim.keymap.set("n", "<leader>ff", function()
- if connections.is_connected then
-  api.find_files()
- else
-  builtin.find_files()
- end
+  if connections.is_connected then
+    api.find_files()
+  else
+    builtin.find_files()
+  end
 end, {})
 vim.keymap.set("n", "<leader>fg", function()
- if connections.is_connected then
-  api.live_grep()
- else
-  builtin.live_grep()
- end
+  if connections.is_connected then
+    api.live_grep()
+  else
+    builtin.live_grep()
+  end
 end, {})
+
+-- Magma Keybindings
+vim.api.nvim_set_keymap("n", "<leader>mi", ":MagmaInit<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>me", ":MagmaEvaluateOperator<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ml", ":MagmaEvaluateLine<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>mv", ":<C-u>MagmaEvaluateVisual<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mc", ":MagmaReevaluateCell<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>md", ":MagmaDelete<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mo", ":MagmaShowOutput<CR>", { noremap = true, silent = true })
