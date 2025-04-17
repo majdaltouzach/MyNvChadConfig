@@ -41,6 +41,7 @@
   "remote-nvim.nvim": { "branch": "main", "commit": "66fc20fd259401c7bb6ac5189ecb6283c2eb65d2" },
   "remote-sshfs.nvim": { "branch": "main", "commit": "1ae5784bf0729c8b03cb7fe6561508a673c9adc8" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
+  "tmux.nvim": { "branch": "main", "commit": "2c1c3be0ef287073cef963f2aefa31a15c8b9cd8" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
   "ui": { "branch": "v3.0", "commit": "cf498b0c3f75cc65ea809cc3f3cd9bbfa937b042" },
   "vimtex": { "branch": "master", "commit": "237671ff5852e30f1ad47a572d55a9c2e2dbe91d" },
