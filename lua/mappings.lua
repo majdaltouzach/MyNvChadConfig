@@ -3,6 +3,7 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
@@ -11,42 +12,43 @@ map("n", "<leader>cv", "<cmd>VimtexView<CR>", { desc = "View LaTex pdf output" }
 map("n", "<leader>op", "<cmd>PeekOpen<CR>", { desc = "View Markdown Output" })
 
 -- Overseer keybinds
-vim.keymap.set("n", "<leader>or", ":OverseerRun<CR>", { desc = "Run Overseer Task" })
-vim.keymap.set("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Task Window" })
-vim.keymap.set("n", "<leader>ol", ":OverseerLoadBundle<CR>", { desc = "Load Overseer Bundle" })
+map("n", "<leader>or", ":OverseerRun<CR>", { desc = "Run Overseer Task" })
+map("n", "<leader>ot", ":OverseerToggle<CR>", { desc = "Toggle Task Window" })
+map("n", "<leader>ol", ":OverseerLoadBundle<CR>", { desc = "Load Overseer Bundle" })
 
 -- Toggle term
 map("n", "<leader>tt", "<cmd>ToggleTerm<CR>", { desc = "Toggles ToggleTerm terminal emulator in neovim" })
 
+-- Remote SSHFS
 local api = require "remote-sshfs.api"
-vim.keymap.set("n", "<leader>rc", api.connect, {})
-vim.keymap.set("n", "<leader>rd", api.disconnect, {})
-vim.keymap.set("n", "<leader>re", api.edit, {})
+map("n", "<leader>rc", api.connect, {})
+map("n", "<leader>rd", api.disconnect, {})
+map("n", "<leader>re", api.edit, {})
 
 -- Leetcode.nvim
-vim.keymap.set("n", "<leader>pp", "<cmd>Leet<CR>", { desc = "Pick LeetCode Question" })
-vim.keymap.set("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run LeetCode Code" })
-vim.keymap.set("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit LeetCode Code" })
-vim.keymap.set("n", "<leader>ln", "<cmd>Leet next_testcase<CR>", { desc = "Next LeetCode Test Case" })
-vim.keymap.set("n", "<leader>lp", "<cmd>Leet prev_testcase<CR>", { desc = "Previous LeetCode Test Case" })
-vim.keymap.set("n", "<leader>ll", "<cmd>Leet lang<CR>", { desc = "Set LeetCode Language" })
+map("n", "<leader>pp", "<cmd>Leet<CR>", { desc = "Pick LeetCode Question" })
+map("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run LeetCode Code" })
+map("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit LeetCode Code" })
+map("n", "<leader>ln", "<cmd>Leet next_testcase<CR>", { desc = "Next LeetCode Test Case" })
+map("n", "<leader>lp", "<cmd>Leet prev_testcase<CR>", { desc = "Previous LeetCode Test Case" })
+map("n", "<leader>ll", "<cmd>Leet lang<CR>", { desc = "Set LeetCode Language" })
 
 -- FindCMDLine
 if pcall(require, "fine-cmdline") then
   vim.api.nvim_set_keymap("n", ":", "<cmd>FineCmdline<CR>", { noremap = true })
 end
 
--- (optional) Override telescope find_files and live_grep to make dynamic based on if connected to host
+-- Dynamic Telescope based on remote connection
 local builtin = require "telescope.builtin"
 local connections = require "remote-sshfs.connections"
-vim.keymap.set("n", "<leader>ff", function()
+map("n", "<leader>ff", function()
   if connections.is_connected then
     api.find_files()
   else
     builtin.find_files()
   end
 end, {})
-vim.keymap.set("n", "<leader>fg", function()
+map("n", "<leader>fg", function()
   if connections.is_connected then
     api.live_grep()
   else
@@ -55,10 +57,18 @@ vim.keymap.set("n", "<leader>fg", function()
 end, {})
 
 -- Magma Keybindings
-vim.api.nvim_set_keymap("n", "<leader>mi", ":MagmaInit<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>me", ":MagmaEvaluateOperator<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>ml", ":MagmaEvaluateLine<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>mv", ":<C-u>MagmaEvaluateVisual<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>mc", ":MagmaReevaluateCell<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>md", ":MagmaDelete<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>mo", ":MagmaShowOutput<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>mi", ":MagmaInit<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>me", ":MagmaEvaluateOperator<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>ml", ":MagmaEvaluateLine<CR>", opts)
+vim.api.nvim_set_keymap("v", "<leader>mv", ":<C-u>MagmaEvaluateVisual<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>mc", ":MagmaReevaluateCell<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>md", ":MagmaDelete<CR>", opts)
+vim.api.nvim_set_keymap("n", "<leader>mo", ":MagmaShowOutput<CR>", opts)
+
+-- Tmux bindings for vim
+map("n", "<C-h>", function() require("tmux").move_left() end, opts)
+map("n", "<C-j>", function() require("tmux").move_bottom() end, opts)
+map("n", "<C-k>", function() require("tmux").move_top() end, opts)
+map("n", "<C-l>", function() require("tmux").move_right() end, opts)
+map("n", "<C-n>", function() require("tmux").next_window() end, opts)
+map("n", "<C-p>", function() require("tmux").previous_window() end, opts)
