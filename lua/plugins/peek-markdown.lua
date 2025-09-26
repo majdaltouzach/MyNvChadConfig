@@ -8,7 +8,7 @@ return
         require("peek").setup({
           auto_load = true,
           syntax = true,
-          app = {'chromium', '--new-window' }
+          app = {'chromium-browser', '--new-window' }
 
       })
         vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
