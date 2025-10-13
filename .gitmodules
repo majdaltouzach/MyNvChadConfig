@@ -1,0 +1,3 @@
+[submodule "lua/lspconfig"]
+	path = lua/lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
