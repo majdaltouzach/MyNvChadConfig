@@ -1,3 +1,6 @@
 [submodule "lua/lspconfig"]
 	path = lua/lspconfig
 	url = git@github.com:neovim/nvim-lspconfig.git
+[submodule "lua/nvim-lspconfig"]
+	path = lua/nvim-lspconfig
+	url = git@github.com:neovim/nvim-lspconfig.git
