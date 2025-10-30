@@ -1,105 +1,86 @@
--- load defaults i.e lua_lsp
+-- Load NvChad defaults
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
--- EXAMPLE
-local servers = { "html", "cssls", "clangd" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+-- Common defaults
+local defaults = {
+  on_attach = nvlsp.on_attach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+}
+
+-- Simple servers
+for _, server in ipairs({ "html", "cssls", "clangd" }) do
+  vim.lsp.config(server, defaults)
 end
 
-lspconfig.hls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- Haskell
+vim.lsp.config("hls", vim.tbl_extend("force", defaults, {
   filetypes = { "haskell", "lhaskell", "cabal" },
-}
+}))
 
-lspconfig.jedi_language_server.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- Python (Jedi + Pylsp)
+vim.lsp.config("jedi_language_server", vim.tbl_extend("force", defaults, {
   filetypes = { "python" },
-}
+}))
 
-lspconfig.pylsp.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+vim.lsp.config("pylsp", vim.tbl_extend("force", defaults, {
   cmd = { "pylsp" },
   filetypes = { "python" },
   single_file_support = true,
-}
+}))
 
-lspconfig.jdtls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-  cmds = { "jdtls", "-configuration", "/home/user/.cache/jdtls/config", "-data", "/home/user/.cache/jdtls/workspace" },
-}
+-- Java
+vim.lsp.config("jdtls", vim.tbl_extend("force", defaults, {
+  cmd = {
+    "jdtls",
+    "-configuration", "/home/user/.cache/jdtls/config",
+    "-data", "/home/user/.cache/jdtls/workspace",
+  },
+}))
 
-lspconfig.texlab.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- LaTeX
+vim.lsp.config("texlab", vim.tbl_extend("force", defaults, {
   cmd = { "texlab" },
   filetypes = { "tex", "plaintex", "bib" },
-}
+}))
 
-lspconfig.omnisharp.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- C# / VB (OmniSharp)
+vim.lsp.config("omnisharp", vim.tbl_extend("force", defaults, {
   cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
   filetypes = { "cs", "vb" },
-  root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
-  enable_import_completion = true,
-  organize_imports_on_format = true,
-  enable_roslyn_analyzers = true,
-}
+  root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git"),
+  settings = {
+    enable_import_completion = true,
+    organize_imports_on_format = true,
+    enable_roslyn_analyzers = true,
+  },
+}))
 
-lspconfig.markdown_oxide.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- Markdown
+vim.lsp.config("markdown_oxide", vim.tbl_extend("force", defaults, {
   cmd = { "markdown-oxide" },
   filetypes = { "markdown" },
-  single_file_support = { true },
-}
+  single_file_support = true,
+}))
 
-lspconfig.arduino_language_server.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = {
-    textDocument = {
-      semanticTokens = vim.NIL,
-    },
-    workspace = {
-      semanticTokens = vim.NIL,
-    },
-  },
+-- Arduino
+vim.lsp.config("arduino_language_server", vim.tbl_extend("force", defaults, {
   cmd = { "arduino-language-server" },
   filetypes = { "arduino" },
-}
+  capabilities = {
+    textDocument = { semanticTokens = vim.NIL },
+    workspace = { semanticTokens = vim.NIL },
+  },
+}))
 
-lspconfig.vimls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
+-- Vimscript
+vim.lsp.config("vimls", vim.tbl_extend("force", defaults, {
   cmd = { "vim-language-server", "--stdio" },
   filetypes = { "vim" },
   init_options = {
-    diagnostic = {
-      enable = true,
-    },
+    diagnostic = { enable = true },
     indexes = {
       count = 3,
       gap = 100,
@@ -108,99 +89,79 @@ lspconfig.vimls.setup {
     },
     isNeovim = true,
     iskeyword = "@,48-57,_,192-255,-#",
-    runtimepath = "",
     suggest = {
       fromRuntimepath = true,
       fromVimruntime = true,
     },
-    vimruntime = "",
   },
-  single_file_support = { true },
-}
+  single_file_support = true,
+}))
 
-lspconfig.taplo.setup {
+-- TOML
+vim.lsp.config("taplo", {
   cmd = { "taplo", "lsp", "stdio" },
   filetypes = { "toml" },
-  single_file_support = { true },
-}
-lspconfig.bashls.setup {
+  single_file_support = true,
+})
+
+-- Bash
+vim.lsp.config("bashls", {
   cmd = { "bash-language-server", "start" },
   filetypes = { "bash", "sh" },
-  root_dir = { "gF" },
   settings = {
     bashIde = {
       globPattern = "*@(.sh|.inc|.bash|.command)",
     },
   },
   single_file_support = true,
-}
+})
 
-lspconfig.nginx_language_server.setup {
+-- Nginx
+vim.lsp.config("nginx_language_server", {
   cmd = { "nginx-language-server" },
   filetypes = { "nginx" },
-  root_dir = "gF",
   single_file_support = true,
-}
+})
 
-lspconfig.clojure_lsp.setup {
+-- Clojure
+vim.lsp.config("clojure_lsp", {
   cmd = { "clojure-lsp" },
   filetypes = { "clojure", "edn" },
-  root_dir = { "gF" },
   single_file_support = true,
-}
+})
 
--- lspconfig.gdtoolkit.setup {
---   cmd = {"gdtoolkit"},
---   filetypes = { "gd", "gdscript", "gdscript3", "gdshader", "gdshaderinc"},
---   root_dir = {"gF"}
---
--- }
-
--- lspconfig.gdshader_lsp.setup {
---   cmd = {"gdshader-lsp", "--stdio"},
---   filetypes = { "gdshader", "gdshaderinc" },
---   root_dir = {"gF"}
--- }
---
-lspconfig.jsonls.setup {
+-- JSON
+vim.lsp.config("jsonls", {
   cmd = { "vscode-json-language-server", "--stdio" },
   filetypes = { "json", "jsonc" },
-  init_options = {
-    provideFormatter = true,
-  },
-  root_dir = { "gF" },
+  init_options = { provideFormatter = true },
   single_file_support = true,
-}
+})
 
-lspconfig.docker_compose_language_service.setup {
+-- Docker
+vim.lsp.config("docker_compose_language_service", {
   cmd = { "docker-compose-langserver", "--stdio" },
   filetypes = { "yaml.docker-compose" },
-  root_dir = { "gF" },
   single_file_support = true,
-}
+})
 
-lspconfig.dockerls.setup {
+vim.lsp.config("dockerls", {
   cmd = { "docker-langserver", "--stdio" },
   filetypes = { "dockerfile" },
-  root_dir = { "gF" },
   single_file_support = true,
-}
+})
 
-lspconfig.lemminx.setup {
+-- XML
+vim.lsp.config("lemminx", {
   cmd = { "lemminx" },
   filetypes = { "xml", "xsd", "xsl", "xslt", "svg" },
-  root_dir = {"gF"},
-  single_file_support = true
+  single_file_support = true,
+})
 
-}
-
-lspconfig.cmake.setup {
- cmd = {"cmake-language-server"},
- filetypes = {"cmake"},
- init_options = {
-    buildDirectory = "build"
-  },
-
-  root_dir = {"gF"},
-  single_file_support = true
-}
+-- CMake
+vim.lsp.config("cmake", {
+  cmd = { "cmake-language-server" },
+  filetypes = { "cmake" },
+  init_options = { buildDirectory = "build" },
+  single_file_support = true,
+})
