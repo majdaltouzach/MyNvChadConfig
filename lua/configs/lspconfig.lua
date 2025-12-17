@@ -165,3 +165,19 @@ vim.lsp.config("cmake", {
   init_options = { buildDirectory = "build" },
   single_file_support = true,
 })
+-- Enable bashls
+vim.lsp.enable('bashls')
+-- Enable dockerls 
+vim.lsp.enable('dockerls')
+-- Enable docker compose config
+vim.lsp.enable('docker_compose_language_service')
+-- Enable python jedi_language_server 
+vim.lsp.enable('jedi_language_server')
+-- Enable Python LSP
+vim.lsp.enable('pylsp')
+-- Enable Java 
+vim.lsp.enable('jdtls')
+-- Enable C/C++
+vim.lsp.enable('clangd')
+-- Enable CSharp
+vim.lsp.enable('omnisharp')
