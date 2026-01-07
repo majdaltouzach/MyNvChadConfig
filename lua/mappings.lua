@@ -5,10 +5,16 @@ require "nvchad.mappings"
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+-- VimTeX Compile
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "<leader>cc", "<cmd>VimtexCompile<CR>", { desc = "Compile LaTeX document" })
 map("n", "<leader>cv", "<cmd>VimtexView<CR>", { desc = "View LaTex pdf output" })
+
+-- Typst Watch
+map("n", "<leader>tw", "<cmd>TypstWatch<CR>", { desc = "Executes Typst Watch %file.typ" })
+
+-- Peek For Markdown
 map("n", "<leader>op", "<cmd>PeekOpen<CR>", { desc = "View Markdown Output" })
 
 -- Overseer keybinds
