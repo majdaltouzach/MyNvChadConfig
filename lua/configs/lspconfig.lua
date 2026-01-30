@@ -181,3 +181,11 @@ vim.lsp.enable('jdtls')
 vim.lsp.enable('clangd')
 -- Enable CSharp
 vim.lsp.enable('omnisharp')
+vim.lsp.enable({
+  "clangd",
+  "bashls",
+  "jdtls",
+  "jedi_language_server",
+  "pylsp",
+  "omnisharp"
+})
