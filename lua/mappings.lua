@@ -71,6 +71,10 @@ vim.api.nvim_set_keymap("n", "<leader>mc", ":MagmaReevaluateCell<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>md", ":MagmaDelete<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>mo", ":MagmaShowOutput<CR>", opts)
 
+
+-- Claude Code bindings
+map("n", "<leader>cr", "<cmd>ClaudeCode<CR>", { desc = "Run Claude Code" })
+
 -- Tmux bindings for vim
 map("n", "<C-h>", function()
   require("tmux").move_left()
