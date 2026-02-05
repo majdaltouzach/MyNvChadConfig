@@ -4,8 +4,8 @@
 git clone https://github.com/majdaltouzach/MyNvChadConfig.git %USERPROFILE%\AppData\Local\nvim && nvim  
 ```
 ### Install on Windows using **PowerShell (pwsh)**:
-```bash 
-git clone https://github.com/NvChad/starter $ENV:USERPROFILE\AppData\Local\nvim && nvim
+```bash
+git clone https://github.com/majdaltouzach/MyNvChadConfig.git $ENV:USERPROFILE\AppData\Local\nvim && nvim
 ```
 
 ### Install on MacOS & Linux:
