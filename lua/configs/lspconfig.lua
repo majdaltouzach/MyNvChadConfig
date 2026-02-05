@@ -167,6 +167,8 @@ vim.lsp.config("cmake", {
 })
 -- Enable bashls
 vim.lsp.enable('bashls')
+-- Enable tinymist
+vim.lsp.enable('tinymist')
 -- Enable dockerls 
 vim.lsp.enable('dockerls')
 -- Enable docker compose config
