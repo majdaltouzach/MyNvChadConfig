@@ -220,4 +220,6 @@ vim.lsp.enable {
   "pylsp",
   "omnisharp",
   "gitlint",
+  "sqls",
+  "yamlls",
 }
