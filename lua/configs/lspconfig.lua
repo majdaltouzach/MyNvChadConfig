@@ -11,91 +11,120 @@ local defaults = {
 }
 
 -- Simple servers
-for _, server in ipairs({ "html", "cssls", "clangd" }) do
+for _, server in ipairs { "html", "cssls", "clangd" } do
   vim.lsp.config(server, defaults)
 end
 
 -- Haskell
-vim.lsp.config("hls", vim.tbl_extend("force", defaults, {
-  filetypes = { "haskell", "lhaskell", "cabal" },
-}))
+vim.lsp.config(
+  "hls",
+  vim.tbl_extend("force", defaults, {
+    filetypes = { "haskell", "lhaskell", "cabal" },
+  })
+)
 
 -- Python (Jedi + Pylsp)
-vim.lsp.config("jedi_language_server", vim.tbl_extend("force", defaults, {
-  filetypes = { "python" },
-}))
+vim.lsp.config(
+  "jedi_language_server",
+  vim.tbl_extend("force", defaults, {
+    filetypes = { "python" },
+  })
+)
 
-vim.lsp.config("pylsp", vim.tbl_extend("force", defaults, {
-  cmd = { "pylsp" },
-  filetypes = { "python" },
-  single_file_support = true,
-}))
+vim.lsp.config(
+  "pylsp",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "pylsp" },
+    filetypes = { "python" },
+    single_file_support = true,
+  })
+)
 
 -- Java
-vim.lsp.config("jdtls", vim.tbl_extend("force", defaults, {
-  cmd = {
-    "jdtls",
-    "-configuration", "/home/user/.cache/jdtls/config",
-    "-data", "/home/user/.cache/jdtls/workspace",
-  },
-}))
+vim.lsp.config(
+  "jdtls",
+  vim.tbl_extend("force", defaults, {
+    cmd = {
+      "jdtls",
+      "-configuration",
+      "/home/user/.cache/jdtls/config",
+      "-data",
+      "/home/user/.cache/jdtls/workspace",
+    },
+  })
+)
 
 -- LaTeX
-vim.lsp.config("texlab", vim.tbl_extend("force", defaults, {
-  cmd = { "texlab" },
-  filetypes = { "tex", "plaintex", "bib" },
-}))
+vim.lsp.config(
+  "texlab",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "texlab" },
+    filetypes = { "tex", "plaintex", "bib" },
+  })
+)
 
 -- C# / VB (OmniSharp)
-vim.lsp.config("omnisharp", vim.tbl_extend("force", defaults, {
-  cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
-  filetypes = { "cs", "vb" },
-  root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git"),
-  settings = {
-    enable_import_completion = true,
-    organize_imports_on_format = true,
-    enable_roslyn_analyzers = true,
-  },
-}))
+vim.lsp.config(
+  "omnisharp",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    filetypes = { "cs", "vb" },
+    root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git"),
+    settings = {
+      enable_import_completion = true,
+      organize_imports_on_format = true,
+      enable_roslyn_analyzers = true,
+    },
+  })
+)
 
 -- Markdown
-vim.lsp.config("markdown_oxide", vim.tbl_extend("force", defaults, {
-  cmd = { "markdown-oxide" },
-  filetypes = { "markdown" },
-  single_file_support = true,
-}))
+vim.lsp.config(
+  "markdown_oxide",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "markdown-oxide" },
+    filetypes = { "markdown" },
+    single_file_support = true,
+  })
+)
 
 -- Arduino
-vim.lsp.config("arduino_language_server", vim.tbl_extend("force", defaults, {
-  cmd = { "arduino-language-server" },
-  filetypes = { "arduino" },
-  capabilities = {
-    textDocument = { semanticTokens = vim.NIL },
-    workspace = { semanticTokens = vim.NIL },
-  },
-}))
+vim.lsp.config(
+  "arduino_language_server",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "arduino-language-server" },
+    filetypes = { "arduino" },
+    capabilities = {
+      textDocument = { semanticTokens = vim.NIL },
+      workspace = { semanticTokens = vim.NIL },
+    },
+  })
+)
 
 -- Vimscript
-vim.lsp.config("vimls", vim.tbl_extend("force", defaults, {
-  cmd = { "vim-language-server", "--stdio" },
-  filetypes = { "vim" },
-  init_options = {
-    diagnostic = { enable = true },
-    indexes = {
-      count = 3,
-      gap = 100,
-      projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
-      runtimepath = true,
+vim.lsp.config(
+  "vimls",
+  vim.tbl_extend("force", defaults, {
+    cmd = { "vim-language-server", "--stdio" },
+    filetypes = { "vim" },
+    init_options = {
+      diagnostic = { enable = true },
+      indexes = {
+        count = 3,
+        gap = 100,
+        projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+        runtimepath = true,
+      },
+      isNeovim = true,
+      iskeyword = "@,48-57,_,192-255,-#",
+      suggest = {
+        fromRuntimepath = true,
+        fromVimruntime = true,
+      },
     },
-    isNeovim = true,
-    iskeyword = "@,48-57,_,192-255,-#",
-    suggest = {
-      fromRuntimepath = true,
-      fromVimruntime = true,
-    },
-  },
-  single_file_support = true,
-}))
+    single_file_support = true,
+  })
+)
 
 -- TOML
 vim.lsp.config("taplo", {
@@ -166,28 +195,29 @@ vim.lsp.config("cmake", {
   single_file_support = true,
 })
 -- Enable bashls
-vim.lsp.enable('bashls')
+vim.lsp.enable "bashls"
 -- Enable tinymist
-vim.lsp.enable('tinymist')
--- Enable dockerls 
-vim.lsp.enable('dockerls')
+vim.lsp.enable "tinymist"
+-- Enable dockerls
+vim.lsp.enable "dockerls"
 -- Enable docker compose config
-vim.lsp.enable('docker_compose_language_service')
--- Enable python jedi_language_server 
-vim.lsp.enable('jedi_language_server')
+vim.lsp.enable "docker_compose_language_service"
+-- Enable python jedi_language_server
+vim.lsp.enable "jedi_language_server"
 -- Enable Python LSP
-vim.lsp.enable('pylsp')
--- Enable Java 
-vim.lsp.enable('jdtls')
+vim.lsp.enable "pylsp"
+-- Enable Java
+vim.lsp.enable "jdtls"
 -- Enable C/C++
-vim.lsp.enable('clangd')
+vim.lsp.enable "clangd"
 -- Enable CSharp
-vim.lsp.enable('omnisharp')
-vim.lsp.enable({
+vim.lsp.enable "omnisharp"
+vim.lsp.enable {
   "clangd",
   "bashls",
   "jdtls",
   "jedi_language_server",
   "pylsp",
-  "omnisharp"
-})
+  "omnisharp",
+  "gitlint",
+}
