@@ -9,13 +9,12 @@ return {
       provider = "ollama",
       auto_suggestions_provider = "ollama",
       
-      -- Ollama configuration
-      vendors = {
+      -- NEW: Ollama configuration in providers (not vendors)
+      providers = {
         ollama = {
-          __inherited_from = "openai",
-          api_key_name = "",
           endpoint = "http://127.0.0.1:11434/v1",
           model = "gemma3n:e4b",
+          api_key_name = "",
           parse_curl_args = function(opts, code_opts)
             return {
               url = opts.endpoint .. "/chat/completions",
@@ -49,7 +48,6 @@ return {
       
       -- Key mappings
       mappings = {
-        --- @class AvanteConflictMappings
         diff = {
           ours = "co",
           theirs = "ct",
@@ -104,11 +102,6 @@ return {
           incoming = "DiffAdd",
         },
       },
-      
-      -- File configuration
-      file_selector = {
-        provider = "native",
-      },
     },
     
     -- Build step
@@ -120,11 +113,8 @@ return {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      
-      -- Web devicons
       "nvim-tree/nvim-web-devicons",
       
-      -- Image support
       {
         "HakonHarnes/img-clip.nvim",
         event = "VeryLazy",
@@ -139,7 +129,6 @@ return {
         },
       },
       
-      -- Markdown rendering
       {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
