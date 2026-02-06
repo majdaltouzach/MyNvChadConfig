@@ -222,4 +222,5 @@ vim.lsp.enable {
   "gitlint",
   "sqls",
   "yamlls",
+  "nginx_language_server",
 }
