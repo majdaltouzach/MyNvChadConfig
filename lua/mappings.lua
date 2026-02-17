@@ -94,3 +94,9 @@ map("n", "<leader>cr", "<cmd>ClaudeCode<CR>", { desc = "Run Claude Code" })
 -- map("n", "<C-p>", function()
 --   require("tmux").previous_window()
 -- end, opts)
+-- local map = vim.keymap.set
+
+map("n", "<C-h>", "<cmd>TmuxNavigateLeft<cr>",  { desc = "Pane left" })
+map("n", "<C-j>", "<cmd>TmuxNavigateDown<cr>",  { desc = "Pane down" })
+map("n", "<C-k>", "<cmd>TmuxNavigateUp<cr>",    { desc = "Pane up" })
+map("n", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { desc = "Pane right" })
