@@ -1,9 +1,5 @@
-return {
+return
+{
+  "christoomey/vim-tmux-navigator",
   lazy = false,
-  "aserowy/tmux.nvim",
-  config = function ()
-   require("tmux").setup({
-      enable_default_keybindings = false
-    })
-  end
 }
