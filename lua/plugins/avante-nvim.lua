@@ -26,6 +26,7 @@ return {
           endpoint = "http://localhost:11434",
           model = "qwen2.5-coder:latest",
           timeout = 30000,
+          is_env_set = function() return true end,
           extra_request_body = {
             temperature = 0.7,
             max_tokens = 8192,
