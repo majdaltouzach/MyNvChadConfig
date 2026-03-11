@@ -23,7 +23,7 @@ return {
           },
         },
         ollama = {
-          endpoint = "http://localhost:11434/v1",
+          endpoint = "http://localhost:11434",
           model = "qwen2.5-coder:latest",
           timeout = 30000,
           extra_request_body = {
