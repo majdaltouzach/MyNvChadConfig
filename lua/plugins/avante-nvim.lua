@@ -80,7 +80,7 @@ return {
       windows = {
         position = "right",
         wrap = true,
-        width = 30,
+        width = 50,
         sidebar_header = {
           align = "center",
           rounded = true,
@@ -97,6 +97,15 @@ return {
 
     config = function(_, opts)
       require("avante").setup(opts)
+
+      -- Maximize avante window when it opens (fullscreen-like experience)
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("AvanteFullscreen", { clear = true }),
+        pattern = "Avante",
+        callback = function()
+          vim.cmd("wincmd |")
+        end,
+      })
 
       -- Select an ollama model from those available at localhost:11434
       vim.api.nvim_create_user_command("AvanteOllamaModel", function()
