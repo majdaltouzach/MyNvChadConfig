@@ -160,3 +160,4 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/vim,lua,git,linux,windows,macos
 *.lazy-lock.json
+CLAUDE.md
