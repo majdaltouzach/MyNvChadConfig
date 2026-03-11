@@ -11,6 +11,7 @@ return {
     opts = {
       instructions_file = "avante.md",
       provider = "ollama",
+      mode = "agentic",
 
       providers = {
         claude = {
@@ -25,11 +26,19 @@ return {
         ollama = {
           endpoint = "http://localhost:11434",
           model = "qwen2.5-coder:latest",
-          timeout = 30000,
-          is_env_set = function() return true end,
+          timeout = 60000,
+          -- Use check_endpoint_alive so avante enables/disables based on whether Ollama is running
+          is_env_set = function()
+            return require("avante.providers").ollama.check_endpoint_alive()
+          end,
+          -- qwen2.5-coder supports native tool calling; disable ReAct text-parsing
+          -- so the model receives proper tool schemas and can read/write editor files
+          use_ReAct_prompt = false,
           extra_request_body = {
-            temperature = 0.7,
-            max_tokens = 8192,
+            options = {
+              temperature = 0.7,
+              num_ctx = 16384,
+            },
           },
         },
       },
@@ -38,7 +47,7 @@ return {
         auto_suggestions = false,
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
-        auto_apply_diff_after_generation = false,
+        auto_apply_diff_after_generation = true,
         support_paste_from_clipboard = true,
       },
 
@@ -110,42 +119,23 @@ return {
 
       -- Select an ollama model from those available at localhost:11434
       vim.api.nvim_create_user_command("AvanteOllamaModel", function()
-        vim.fn.jobstart({ "curl", "-sf", "http://localhost:11434/api/tags" }, {
-          stdout_buffered = true,
-          on_stdout = function(_, data)
-            if not data or #data == 0 then
-              vim.notify("AvanteOllamaModel: no response from ollama", vim.log.levels.ERROR)
-              return
-            end
-            local ok, decoded = pcall(vim.fn.json_decode, table.concat(data, ""))
-            if not ok or not decoded or not decoded.models then
-              vim.notify("AvanteOllamaModel: failed to parse ollama response", vim.log.levels.ERROR)
-              return
-            end
-            local models = vim.tbl_map(function(m) return m.name end, decoded.models)
-            if #models == 0 then
-              vim.notify("AvanteOllamaModel: no models found in ollama", vim.log.levels.WARN)
-              return
-            end
-            vim.schedule(function()
-              vim.ui.select(models, { prompt = "Select Ollama model:" }, function(choice)
-                if not choice then return end
-                require("avante.config").override({
-                  provider = "ollama",
-                  providers = {
-                    ollama = { model = choice },
-                  },
-                })
-                vim.notify("Avante: switched to ollama/" .. choice, vim.log.levels.INFO)
-              end)
-            end)
-          end,
-          on_stderr = function(_, data)
-            if data and #data > 0 and data[1] ~= "" then
-              vim.notify("AvanteOllamaModel: " .. table.concat(data, ""), vim.log.levels.ERROR)
-            end
-          end,
-        })
+        local ollama_provider = require("avante.providers").ollama
+        local models = ollama_provider:list_models()
+        if not models or #models == 0 then
+          vim.notify("AvanteOllamaModel: no models found in ollama", vim.log.levels.WARN)
+          return
+        end
+        local names = vim.tbl_map(function(m) return m.id end, models)
+        vim.ui.select(names, { prompt = "Select Ollama model:" }, function(choice)
+          if not choice then return end
+          -- Clear cache so next list_models() re-fetches
+          ollama_provider._model_list_cache = nil
+          require("avante.config").override({
+            provider = "ollama",
+            providers = { ollama = { model = choice } },
+          })
+          vim.notify("Avante: switched to ollama/" .. choice, vim.log.levels.INFO)
+        end)
       end, { desc = "Select Ollama model for Avante" })
     end,
 
