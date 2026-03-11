@@ -24,7 +24,7 @@ return {
         },
         ollama = {
           endpoint = "http://localhost:11434/v1",
-          model = "gemma3n:e4b",
+          model = "qwen2.5-coder:latest",
           timeout = 30000,
           extra_request_body = {
             temperature = 0.7,
