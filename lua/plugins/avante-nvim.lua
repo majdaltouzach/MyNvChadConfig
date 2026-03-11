@@ -9,6 +9,7 @@ return {
     ---@module 'avante'
     ---@type avante.Config
     opts = {
+      instructions_file = "avante.md",
       provider = "ollama",
 
       providers = {
