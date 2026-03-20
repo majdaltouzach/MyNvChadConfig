@@ -223,4 +223,5 @@ vim.lsp.enable {
   "sqls",
   "yamlls",
   "nginx_language_server",
+  "mbake",
 }
