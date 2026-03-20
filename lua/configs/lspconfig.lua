@@ -224,4 +224,5 @@ vim.lsp.enable {
   "yamlls",
   "nginx_language_server",
   "mbake",
+  "golangci_lint_ls",
 }
