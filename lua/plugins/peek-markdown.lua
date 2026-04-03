@@ -8,7 +8,7 @@ return
         require("peek").setup({
           auto_load = true,
           syntax = true,
-          app = { "chromium", "--app=%s"},
+          app = { "chromium", "--new-window"},
           -- app = {"webviewer"},
 
       })
