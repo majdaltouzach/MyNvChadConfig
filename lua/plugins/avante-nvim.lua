@@ -23,6 +23,20 @@ return {
         return { require("mcphub.extensions.avante").mcp_tool() }
       end,
 
+      -- disable avante builtins — MCP servers handle these
+      disabled_tools = {
+        "list_files",
+        "search_files",
+        "read_file",
+        "create_file",
+        "rename_file",
+        "delete_file",
+        "create_dir",
+        "rename_dir",
+        "delete_dir",
+        "bash",
+      },
+
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -35,20 +49,15 @@ return {
         },
         ollama = {
           endpoint = "http://localhost:11434",
-          model = "qwen2.5-coder:7b",
+          model = "qwen2.5-coder:14b",
           timeout = 60000,
-          -- Use check_endpoint_alive so avante enables/disables based on whether Ollama is running
           is_env_set = function()
             return require("avante.providers").ollama.check_endpoint_alive()
           end,
-          -- qwen2.5-coder supports native tool calling; disable ReAct text-parsing
-          -- so the model receives proper tool schemas and can read/write editor files
           use_ReAct_prompt = false,
           extra_request_body = {
-            options = {
-              temperature = 0.7,
-              num_ctx = 16384,
-            },
+            temperature = 0.7,
+            num_ctx = 16384,
           },
         },
       },
@@ -118,7 +127,6 @@ return {
     config = function(_, opts)
       require("avante").setup(opts)
 
-      -- Maximize avante window when it opens (fullscreen-like experience)
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("AvanteFullscreen", { clear = true }),
         pattern = "Avante",
@@ -127,7 +135,6 @@ return {
         end,
       })
 
-      -- Select an ollama model from those available at localhost:11434
       vim.api.nvim_create_user_command("AvanteOllamaModel", function()
         local ollama_provider = require("avante.providers").ollama
         local models = ollama_provider:list_models()
@@ -138,7 +145,6 @@ return {
         local names = vim.tbl_map(function(m) return m.id end, models)
         vim.ui.select(names, { prompt = "Select Ollama model:" }, function(choice)
           if not choice then return end
-          -- Clear cache so next list_models() re-fetches
           ollama_provider._model_list_cache = nil
           require("avante.config").override({
             provider = "ollama",
@@ -178,17 +184,5 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
-  },
-  disabled_tools = {
-    "list_files",
-    "search_files",
-    "read_file",
-    "create_file",
-    "rename_file",
-    "delete_file",
-    "create_dir",
-    "rename_dir",
-    "delete_dir",
-    "bash",
   },
 }
