@@ -54,7 +54,7 @@ return {
           is_env_set = function()
             return require("avante.providers").ollama.check_endpoint_alive()
           end,
-          use_ReAct_prompt = false,
+          use_ReAct_prompt = true,
           extra_request_body = {
             temperature = 0.7,
             num_ctx = 16384,
