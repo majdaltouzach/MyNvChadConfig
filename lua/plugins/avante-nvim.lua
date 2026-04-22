@@ -49,7 +49,7 @@ return {
         },
         ollama = {
           endpoint = "http://localhost:11434",
-          model = "qwen2.5-coder:14b",
+          model = "gemma4:e2b", -- default; use <leader>am to switch at runtime
           timeout = 60000,
           is_env_set = function()
             return require("avante.providers").ollama.check_endpoint_alive()
@@ -135,6 +135,7 @@ return {
         end,
       })
 
+      -- model picker — fetches live list from ollama at runtime
       vim.api.nvim_create_user_command("AvanteOllamaModel", function()
         local ollama_provider = require("avante.providers").ollama
         local models = ollama_provider:list_models()
@@ -153,6 +154,12 @@ return {
           vim.notify("Avante: switched to ollama/" .. choice, vim.log.levels.INFO)
         end)
       end, { desc = "Select Ollama model for Avante" })
+
+      -- keybind to trigger model picker
+      vim.keymap.set("n", "<leader>am", "<cmd>AvanteOllamaModel<cr>", {
+        desc = "Avante: select Ollama model",
+        silent = true,
+      })
     end,
 
     dependencies = {
