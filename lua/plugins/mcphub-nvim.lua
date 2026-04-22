@@ -1,6 +1,7 @@
 -- ~/.config/nvim/lua/plugins/mcphub.lua
 return {
   "ravitemer/mcphub.nvim",
+  lazy = false,
   dependencies = { "nvim-lua/plenary.nvim" },
   build = "npm install -g mcp-hub@latest",
   config = function()

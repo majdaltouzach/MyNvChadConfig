@@ -13,6 +13,16 @@ return {
       provider = "ollama",
       mode = "agentic",
 
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        if not hub then return "" end
+        return hub:get_active_servers_prompt()
+      end,
+
+      custom_tools = function()
+        return { require("mcphub.extensions.avante").mcp_tool() }
+      end,
+
       providers = {
         claude = {
           endpoint = "https://api.anthropic.com",
@@ -25,7 +35,7 @@ return {
         },
         ollama = {
           endpoint = "http://localhost:11434",
-          model = "qwen2.5-coder:latest",
+          model = "qwen2.5-coder:7b",
           timeout = 60000,
           -- Use check_endpoint_alive so avante enables/disables based on whether Ollama is running
           is_env_set = function()
@@ -142,6 +152,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      "ravitemer/mcphub.nvim",
       "nvim-tree/nvim-web-devicons",
       "nvim-telescope/telescope.nvim",
       "hrsh7th/nvim-cmp",
@@ -167,5 +178,17 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+  },
+  disabled_tools = {
+    "list_files",
+    "search_files",
+    "read_file",
+    "create_file",
+    "rename_file",
+    "delete_file",
+    "create_dir",
+    "rename_dir",
+    "delete_dir",
+    "bash",
   },
 }
